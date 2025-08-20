@@ -1,9 +1,7 @@
 import type React from 'react';
-import { createTamagui, TamaguiProvider } from 'tamagui';
+import { TamaguiProvider } from 'tamagui';
 
-import { defaultConfig } from '@tamagui/config/v4';
-
-const config = createTamagui(defaultConfig);
+import { config } from '@/theme';
 
 interface ProvidersProps {
   children: React.ReactNode;
