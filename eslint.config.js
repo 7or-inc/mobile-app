@@ -7,4 +7,10 @@ module.exports = defineConfig([
   {
     ignores: ['dist/*', 'app-example/**/*'],
   },
+  {
+    rules: {
+      '@typescript-eslint/no-empty-object-type': 'off',
+      'react/display-name': 'off',
+    },
+  },
 ]);
