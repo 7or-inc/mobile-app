@@ -1,15 +1,9 @@
-import { Text, View } from 'react-native';
+import { Text, XStack, YStack } from 'tamagui';
 
-export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+export default () => (
+  <XStack flex={1} justify="center">
+    <YStack justify="center">
       <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
-}
+    </YStack>
+  </XStack>
+);
