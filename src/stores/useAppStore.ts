@@ -3,7 +3,7 @@ import * as Localization from 'expo-localization';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-import { languages } from '@/i18n';
+import { languages } from '@/i18n/const';
 
 const getLanguage = (): Language => {
   const locales = Localization.getLocales();

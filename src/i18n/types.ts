@@ -1,4 +1,4 @@
-import { resources } from '.';
+import type { resources } from './const';
 
 export type Resources = typeof resources;
 

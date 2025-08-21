@@ -1,13 +1,8 @@
 import { useFormatNumber } from '@/hooks';
 import { useAppStore } from '@/stores';
 
-import ar from './ar';
-import en from './en';
-
-import type { I18nKey, LanguageTranslations, TranslateOptions, Translation } from './types';
-
-export const resources = { en, ar } as const satisfies Record<Language, Translation>;
-export const languages: Language[] = ['en', 'ar'];
+import { resources } from './const';
+import type { I18nKey, LanguageTranslations, TranslateOptions } from './types';
 
 export const useTranslate = () => {
   const appLanguage = useAppStore((state) => state.language);
