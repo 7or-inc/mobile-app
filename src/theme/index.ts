@@ -1,6 +1,5 @@
 import { createTheme } from '@shopify/restyle';
 
-import { Platform } from 'react-native';
 import { borderRadii, colors, spacing } from './tokens';
 
 const theme = createTheme({
@@ -21,14 +20,6 @@ const theme = createTheme({
     defaults: {
       fontSize: 16,
       color: 'white',
-      ...Platform.select({
-        ios: {
-          backgroundColor: 'white',
-        },
-        android: {
-          backgroundColor: 'transparent',
-        },
-      }),
     },
   },
 });
