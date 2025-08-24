@@ -1,9 +1,7 @@
-import { Text, XStack, YStack } from 'tamagui';
+import { Text, View } from 'react-native';
 
 export default () => (
-  <XStack flex={1} justify="center">
-    <YStack justify="center">
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </YStack>
-  </XStack>
+  <View>
+    <Text>Edit app/index.tsx to edit this screen.</Text>
+  </View>
 );

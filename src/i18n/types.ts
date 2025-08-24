@@ -15,18 +15,17 @@ type StripTrailingSlash<S extends string> = S extends `${infer R}/` ? StripTrail
 
 type CleanTag<S extends string> = Trim<StripTrailingSlash<Trim<S>>>;
 
-export type ExtractPlaceholders<S extends string> = S extends `${string}{${infer K}}${infer Rest}`
+type ExtractPlaceholders<S extends string> = S extends `${string}{${infer K}}${infer Rest}`
   ? K | ExtractPlaceholders<Rest>
   : never;
 
-export type ExtractTags<S extends string> =
-  S extends `${string}<${infer Open}>${infer Mid}</${infer Close}>${infer Rest}`
-    ? CleanTag<Open> | CleanTag<Close> | ExtractTags<Mid> | ExtractTags<Rest>
-    : S extends `${string}<${infer Raw}/>${infer Rest2}`
-      ? CleanTag<Raw> | ExtractTags<Rest2>
-      : S extends `${string}<${infer Raw2} />${infer Rest3}`
-        ? CleanTag<Raw2> | ExtractTags<Rest3>
-        : never;
+type ExtractTags<S extends string> = S extends `${string}<${infer Open}>${infer Mid}</${infer Close}>${infer Rest}`
+  ? CleanTag<Open> | CleanTag<Close> | ExtractTags<Mid> | ExtractTags<Rest>
+  : S extends `${string}<${infer Raw}/>${infer Rest2}`
+    ? CleanTag<Raw> | ExtractTags<Rest2>
+    : S extends `${string}<${infer Raw2} />${infer Rest3}`
+      ? CleanTag<Raw2> | ExtractTags<Rest3>
+      : never;
 
 type Lang = keyof Resources;
 type KeysOf<L extends Lang> = keyof Resources[L] & string;

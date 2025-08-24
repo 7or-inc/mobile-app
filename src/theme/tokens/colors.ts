@@ -9,4 +9,7 @@ export const colors = {
   'foreground.dark': '#ECF0F1',
   background: '#2C3E50',
   'background.dark': '#11181E',
-};
+  white: '#FFFFFF',
+  black: '#000000',
+  transparent: 'transparent',
+} as const;
