@@ -1,12 +1,10 @@
+import { ThemeProvider } from '@shopify/restyle';
 import type React from 'react';
-import { TamaguiProvider } from 'tamagui';
 
-import { config } from '@/theme';
+import theme from '@/theme';
 
 interface ProvidersProps {
   children: React.ReactNode;
 }
 
-export const Providers = ({ children }: ProvidersProps) => (
-  <TamaguiProvider config={config}>{children}</TamaguiProvider>
-);
+export const Providers = ({ children }: ProvidersProps) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;

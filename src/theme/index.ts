@@ -1,15 +1,39 @@
-import { defaultConfig } from '@tamagui/config/v4';
-import { createTamagui } from 'tamagui';
+import { createTheme } from '@shopify/restyle';
 
-import { tokens } from './tokens';
+import { Platform } from 'react-native';
+import { borderRadii, colors, spacing } from './tokens';
 
-export const config = createTamagui({
-  ...defaultConfig,
-  tokens,
+const theme = createTheme({
+  colors,
+  spacing,
+  borderRadii,
+  breakpoints: {
+    phone: 0,
+    tablet: 768,
+    desktop: 1024,
+  },
+  textVariants: {
+    h1: {
+      fontSize: 32,
+      fontWeight: 'bold',
+      lineHeight: 40,
+    },
+    defaults: {
+      fontSize: 16,
+      color: 'white',
+      ...Platform.select({
+        ios: {
+          backgroundColor: 'white',
+        },
+        android: {
+          backgroundColor: 'transparent',
+        },
+      }),
+    },
+  },
 });
 
-type Config = typeof config;
+export type Theme = typeof theme;
+export default theme;
 
-declare module 'tamagui' {
-  interface TamaguiCustomConfig extends Config {}
-}
+export * from './props';
