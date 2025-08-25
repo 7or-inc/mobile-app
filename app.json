@@ -8,6 +8,7 @@
     "scheme": "7or",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "assets": ["./src/assets/fonts/"],
     "ios": {
       "supportsTablet": true
     },
