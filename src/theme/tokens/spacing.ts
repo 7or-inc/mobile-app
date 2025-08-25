@@ -40,3 +40,5 @@ export const spacing = {
   '120': 480,
   '128': 512,
 } as const;
+
+export type Spacing = typeof spacing;

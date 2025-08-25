@@ -6,3 +6,5 @@ export const borderRadii = {
   xl: 24,
   full: 9999,
 } as const;
+
+export type BorderRadii = typeof borderRadii;
