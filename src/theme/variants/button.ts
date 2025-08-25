@@ -1,7 +1,4 @@
-import type { ResponsiveValue } from '@shopify/restyle';
-
-import type theme from '..';
-import { fontSizes } from '../tokens';
+import { fontSizes, lineHeights } from '../tokens';
 
 export const buttonVariants = {
   primary: {
@@ -27,15 +24,20 @@ export const buttonVariants = {
 export const buttonTextVariants = {
   primaryButton: {
     fontSize: fontSizes['xl'],
-    lineHeight: fontSizes['2xl'],
-    color: 'white',
-  },
-  secondaryButton: {
-    fontSize: fontSizes['xl'],
-    lineHeight: fontSizes['2xl'],
+    lineHeight: lineHeights['xl'],
     color: 'white',
   },
 } as const;
 
-export const map = (variant: ResponsiveValue<keyof typeof buttonVariants, typeof theme.breakpoints>) =>
-  (variant + 'Button') as keyof typeof buttonTextVariants;
+export type ButtonVariants = Exclude<keyof typeof buttonVariants, 'defaults'>;
+type ButtonTextVariant = keyof typeof buttonTextVariants;
+
+const buttonTextVariantsKeys = Object.keys(buttonTextVariants) as ButtonTextVariant[];
+
+export const getButtonTextVariant = (variant: ButtonVariants | undefined): ButtonTextVariant => {
+  const expectedVariant = (variant + 'Button') as ButtonTextVariant;
+
+  if (!variant || !buttonTextVariantsKeys.includes(expectedVariant)) return 'primaryButton';
+
+  return expectedVariant;
+};

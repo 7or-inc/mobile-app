@@ -10,7 +10,7 @@ import {
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 
 import { base, type BaseProps, type Theme } from '@/theme';
-import { map } from '@/theme/variants/button';
+import { getButtonTextVariant, type ButtonVariants } from '@/theme/variants/button';
 import { Text } from './Text';
 
 type ButtonProps = TouchableOpacityProps &
@@ -26,6 +26,6 @@ const RestyleButton = createRestyleComponent<ButtonProps, Theme>(
 
 export const Button = ({ children, ...props }: ButtonProps) => (
   <RestyleButton activeOpacity={0.7} {...props}>
-    <Text variant={map(props.variant ?? 'primary')}>{children}</Text>
+    <Text variant={getButtonTextVariant(props.variant as ButtonVariants)}>{children}</Text>
   </RestyleButton>
 );

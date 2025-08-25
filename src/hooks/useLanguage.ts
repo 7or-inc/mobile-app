@@ -5,19 +5,19 @@ import { useAppStore } from '@/stores';
 
 export const useLanguage = () => {
   const changeLanguage = useAppStore((state) => state.setLanguage);
-  const currentLanguage = useAppStore((state) => state.language);
+  const language = useAppStore((state) => state.language);
 
-  const setLanguage = async (language: Language) => {
-    if (currentLanguage === language) return;
+  const setLanguage = async (newLanguage: Language) => {
+    if (language === newLanguage) return;
 
-    const isAr = language === 'ar';
+    const isAr = newLanguage === 'ar';
     I18nManager.allowRTL(isAr);
     I18nManager.forceRTL(isAr);
     I18nManager.swapLeftAndRightInRTL(isAr);
 
-    changeLanguage(language);
+    changeLanguage(newLanguage);
     await Updates.reloadAsync();
   };
 
-  return { setLanguage, language: currentLanguage, isAr: currentLanguage === 'ar' };
+  return { setLanguage, language: language, isAr: language === 'ar' };
 };
