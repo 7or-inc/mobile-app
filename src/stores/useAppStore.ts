@@ -5,12 +5,12 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 import { languages } from '@/i18n/const';
 
-const getLanguage = (): Language => {
+const fetchCurrentLanguage = (): Language => {
   const locales = Localization.getLocales();
 
   const matched = locales.find((locale) => languages.includes(locale.languageCode as Language));
 
-  return (matched?.languageCode as Language) ?? languages[0];
+  return (matched?.languageCode ?? languages[0]) as Language;
 };
 
 interface AppState {
@@ -24,9 +24,11 @@ interface AppActions {
 export const useAppStore = create<AppState & AppActions>()(
   persist(
     (set) => ({
-      language: getLanguage(),
+      language: fetchCurrentLanguage(),
       setLanguage: (language) => set({ language }),
     }),
     { name: 'appState', storage: createJSONStorage(() => AsyncStorage) }
   )
 );
+
+export const getLanguage = () => useAppStore.getState().language;
