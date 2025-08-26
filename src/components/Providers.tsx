@@ -1,8 +1,8 @@
 import { ThemeProvider } from '@shopify/restyle';
 import type React from 'react';
 
-import { useLoadFonts } from '@/hooks';
-import theme from '@/theme';
+import { useLoadFonts, useThemeMode } from '@/hooks';
+import { getTheme } from '@/theme';
 
 interface ProvidersProps {
   children: React.ReactNode;
@@ -10,10 +10,11 @@ interface ProvidersProps {
 
 export const Providers = ({ children }: ProvidersProps) => {
   const loaded = useLoadFonts();
+  const { mode } = useThemeMode();
 
   if (!loaded) {
     return null; // or a loading indicator
   }
 
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  return <ThemeProvider theme={getTheme(mode)}>{children}</ThemeProvider>;
 };

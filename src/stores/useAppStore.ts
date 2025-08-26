@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Localization from 'expo-localization';
+import { Appearance } from 'react-native';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -15,17 +16,21 @@ const fetchCurrentLanguage = (): Language => {
 
 interface AppState {
   language: Language;
+  theme: ThemeMode;
 }
 
 interface AppActions {
   setLanguage: (language: Language) => void;
+  setTheme: (theme: ThemeMode) => void;
 }
 
 export const useAppStore = create<AppState & AppActions>()(
   persist(
     (set) => ({
       language: fetchCurrentLanguage(),
+      theme: (Appearance.getColorScheme() ?? 'dark') as ThemeMode,
       setLanguage: (language) => set({ language }),
+      setTheme: (theme) => set({ theme }),
     }),
     { name: 'appState', storage: createJSONStorage(() => AsyncStorage) }
   )
