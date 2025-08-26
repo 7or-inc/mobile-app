@@ -13,7 +13,7 @@ const fetchCurrentLanguage = (): Language => {
   return (matched?.languageCode ?? languages[0]) as Language;
 };
 
-interface AppState {
+interface AppStates {
   language: Language;
   themeMode: ThemeModeWithSystem;
 }
@@ -23,7 +23,7 @@ interface AppActions {
   setThemeMode: (theme: ThemeModeWithSystem) => void;
 }
 
-export const useAppStore = create<AppState & AppActions>()(
+export const useAppStore = create<AppStates & AppActions>()(
   persist(
     (set) => ({
       language: fetchCurrentLanguage(),
