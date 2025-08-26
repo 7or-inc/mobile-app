@@ -8,6 +8,7 @@ export const buttonVariants = {
   secondary: {
     backgroundColor: 'transparent',
     borderColor: 'primary',
+    borderWidth: 2,
   },
   defaults: {
     py: 2,
@@ -15,9 +16,7 @@ export const buttonVariants = {
     borderRadius: 'md',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
     backgroundColor: 'primary',
-    borderColor: 'primary',
   },
 } as const;
 
@@ -25,7 +24,6 @@ export const buttonTextVariants = {
   primaryButton: {
     fontSize: fontSizes['xl'],
     lineHeight: lineHeights['xl'],
-    color: 'white',
   },
 } as const;
 

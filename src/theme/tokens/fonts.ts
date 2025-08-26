@@ -13,14 +13,14 @@ export const fontSizes = {
 export type FontSizes = typeof fontSizes;
 
 export const lineHeights = {
-  xs: 16,
-  sm: 20,
-  md: 24,
-  lg: 28,
-  xl: 32,
-  '2xl': 40,
-  '3xl': 48,
-  '4xl': 56,
-  '5xl': 72,
+  xs: 14,
+  sm: 16,
+  md: 18,
+  lg: 20,
+  xl: 24,
+  '2xl': 32,
+  '3xl': 36,
+  '4xl': 48,
+  '5xl': 56,
 } as const;
 export type LineHeights = typeof lineHeights;
