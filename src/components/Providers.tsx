@@ -1,4 +1,5 @@
 import { ThemeProvider } from '@shopify/restyle';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 import { StatusBar } from 'react-native';
 
@@ -18,10 +19,14 @@ export const Providers = ({ children }: ProvidersProps) => {
   }
 
   return (
-    <ThemeProvider theme={getTheme(mode)}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={getTheme(mode)}>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
 
-      {children}
-    </ThemeProvider>
+        {children}
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
+
+const queryClient = new QueryClient();
