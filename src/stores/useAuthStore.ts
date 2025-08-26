@@ -26,7 +26,7 @@ export const useAuthStore = create<AuthStates & AuthActions>((set) => ({
   },
   loadToken: async () => {
     const token = await getAccessToken();
-    if (!token) return set({ token, isLoggedIn: false });
+    if (!token) return set({ token: null, isLoggedIn: false });
 
     const isTokenValid = await verifyUserToken(token);
     return set({ token, isLoggedIn: isTokenValid });
