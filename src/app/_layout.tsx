@@ -5,7 +5,7 @@ import { useAuthStore } from '@/stores';
 import { useEffect } from 'react';
 
 export default () => {
-  const { isLoggedIn, loadToken } = useAuthStore();
+  const { isLoggedIn, isPending, loadToken } = useAuthStore();
 
   useEffect(() => {
     loadToken();
@@ -14,6 +14,10 @@ export default () => {
   return (
     <Providers>
       <Stack>
+        <Stack.Protected guard={isPending}>
+          <Stack.Screen name="splash-screen" options={{ headerShown: false }} />
+        </Stack.Protected>
+
         <Stack.Protected guard={!isLoggedIn}>
           <Stack.Screen name="(auth)/select-auth" options={{ headerShown: false }} />
           <Stack.Screen name="(auth)/sign-up" options={{ headerShown: false }} />

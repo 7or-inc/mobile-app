@@ -12,6 +12,7 @@ export const palette = {
   pitchBlack: '#000000',
   white: '#FFFFFF',
   transparent: 'transparent',
+  red: '#BC3841',
 } as const;
 
 export type Palette = typeof palette;
@@ -22,9 +23,8 @@ export const colors: Colors = {
   accent: palette.turquoise,
   background: palette.black,
   foreground: palette.darkGrey,
-  white: palette.white,
-  black: palette.pitchBlack,
-  transparent: palette.transparent,
+  error: palette.red,
+  ...palette,
 } as const satisfies Colors;
 
 export const lightColors: Colors = {
@@ -33,13 +33,5 @@ export const lightColors: Colors = {
   foreground: palette.white,
 } as const;
 
-export type Color =
-  | 'primary'
-  | 'secondary'
-  | 'accent'
-  | 'background'
-  | 'foreground'
-  | 'white'
-  | 'black'
-  | 'transparent';
+export type Color = 'primary' | 'secondary' | 'accent' | 'background' | 'foreground' | 'error' | keyof Palette;
 export type Colors = Record<Color, Palette[keyof Palette]>;

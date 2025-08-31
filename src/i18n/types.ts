@@ -1,4 +1,5 @@
 import type { resources } from './const';
+import type { useTranslate } from './index';
 
 export type Resources = typeof resources;
 
@@ -8,6 +9,13 @@ export type AR = Resources['ar'];
 export type I18nKey = keyof EN & keyof AR;
 export type LanguageTranslations = EN | AR;
 export type Translation = Record<string, string>;
+
+export interface TranslationOptions {
+  language?: Language;
+  string?: boolean;
+}
+
+export type TranslationFn = ReturnType<typeof useTranslate>;
 
 type Trim<S extends string> = S extends ` ${infer R}` ? Trim<R> : S extends `${infer R} ` ? Trim<R> : S;
 

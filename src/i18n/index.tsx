@@ -4,7 +4,7 @@ import { useFormatNumber } from '@/hooks';
 import { useAppStore } from '@/stores';
 
 import { resources } from './const';
-import type { I18nKey, LanguageTranslations, TranslateOptions } from './types';
+import type { I18nKey, LanguageTranslations, TranslateOptions, TranslationOptions } from './types';
 
 export const useTranslate = () => {
   const appLanguage = useAppStore((state) => state.language);
@@ -20,15 +20,20 @@ export const useTranslate = () => {
 
   return <Key extends I18nKey>(
     key: Key,
-    options: TranslateOptions<Language, Key> = {} as TranslateOptions<Language, Key>,
-    language: Language = appLanguage
+    placeholderValues: TranslateOptions<Language, Key> = {} as TranslateOptions<Language, Key>,
+    options: TranslationOptions = {
+      language: appLanguage,
+      string: false,
+    }
   ) => {
-    let translation: string = resources[language][key];
+    let translation: string = resources[options?.language ?? appLanguage][key];
 
     const placeholderRegex = /{(\w+)}/g;
     translation = translation.replace(placeholderRegex, (_, optKey) =>
-      formatValue(options[optKey as keyof TranslateOptions<Language, Key>] ?? `{${optKey}}`)
+      formatValue(placeholderValues[optKey as keyof TranslateOptions<Language, Key>] ?? `{${optKey}}`)
     );
+
+    if (options.string) return translation as unknown as LanguageTranslations[Key];
 
     const renderNodes = (text: string): React.ReactNode[] => {
       const nodes: React.ReactNode[] = [];
@@ -43,7 +48,7 @@ export const useTranslate = () => {
 
         if (index > lastIndex) nodes.push(text.slice(lastIndex, index));
 
-        const option = options[tagName as keyof TranslateOptions<Language, Key>];
+        const option = placeholderValues[tagName as keyof TranslateOptions<Language, Key>];
 
         nodes.push(<Fragment key={tagName + lastIndex}>{option(innerContent)}</Fragment>);
 
