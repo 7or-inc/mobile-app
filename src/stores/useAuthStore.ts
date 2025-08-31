@@ -5,6 +5,7 @@ import { getAccessToken, removeAccessToken, setAccessToken, verifyUserToken } fr
 interface AuthStates {
   token: string | null;
   isLoggedIn: boolean;
+  isPending: boolean;
 }
 
 interface AuthActions {
@@ -16,19 +17,26 @@ interface AuthActions {
 export const useAuthStore = create<AuthStates & AuthActions>((set) => ({
   token: null,
   isLoggedIn: false,
+  isPending: true,
   login: async (token) => {
+    set({ isPending: true });
+
     await setAccessToken(token);
-    set({ token, isLoggedIn: true });
+    set({ token, isLoggedIn: true, isPending: false });
   },
   logout: async () => {
+    set({ isPending: true });
+
     await removeAccessToken();
-    set({ token: null, isLoggedIn: false });
+    set({ token: null, isLoggedIn: false, isPending: false });
   },
   loadToken: async () => {
+    set({ isPending: true });
+
     const token = await getAccessToken();
-    if (!token) return set({ token: null, isLoggedIn: false });
+    if (!token) return set({ token: null, isLoggedIn: false, isPending: false });
 
     const isTokenValid = await verifyUserToken(token);
-    return set({ token, isLoggedIn: isTokenValid });
+    return set({ token, isLoggedIn: isTokenValid, isPending: false });
   },
 }));
