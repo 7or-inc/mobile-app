@@ -1,4 +1,5 @@
-name: Expo Build and Release
+name: Expo Cloud Build and Release
+
 on:
   push:
     branches: [master, dev]
@@ -22,19 +23,25 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: Build Android APK
+      - name: Start EAS Android Build
+        id: build
         run: |
-          eas build -p android --profile production --non-interactive --local --output ./app.apk
+          BUILD_URL=$(eas build -p android --profile production --non-interactive --json | jq -r '.[0].artifacts.buildUrl')
+          echo "BUILD_URL=$BUILD_URL" >> $GITHUB_ENV
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Create Release
+      - name: Download build artifact
+        run: |
+          curl -L "$BUILD_URL" -o app.apk
+
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}-${{ github.run_number }}
           name: Release ${{ github.ref_name }}-${{ github.run_number }}
           body: |
-            Automated build from branch: ${{ github.ref_name }}
-          files: ./app.apk
+            Automated cloud build from branch: ${{ github.ref_name }}
+          files: app.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
