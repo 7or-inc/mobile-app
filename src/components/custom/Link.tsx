@@ -5,15 +5,38 @@ import {
   color,
   createRestyleComponent,
   layout,
+  typography,
   type BorderProps,
   type ColorProps,
   type LayoutProps,
+  type TypographyProps,
 } from '@shopify/restyle';
 
-import { base, type BaseProps, type Theme } from '@/theme';
+import { useLanguage } from '@/hooks';
+import { base, fonts, type BaseProps, type FontsProps, type Theme } from '@/theme';
 
-export type LinkProps = ExpoLinkProps & BaseProps & ColorProps<Theme> & LayoutProps<Theme> & BorderProps<Theme>;
+export type LinkProps = ExpoLinkProps &
+  BaseProps &
+  FontsProps &
+  ColorProps<Theme> &
+  LayoutProps<Theme> &
+  BorderProps<Theme> &
+  TypographyProps<Theme>;
 
-const RestyleLink = createRestyleComponent<LinkProps, Theme>([...base, layout, border, color], ExpoLink);
+const RestyleLink = createRestyleComponent<LinkProps, Theme>(
+  [...base, fonts, typography, layout, border, color],
+  ExpoLink
+);
 
-export const Link = (props: LinkProps) => <RestyleLink {...props} />;
+export const Link = (props: LinkProps) => {
+  const { isAr } = useLanguage();
+
+  return (
+    <RestyleLink
+      color="primary"
+      textDecorationLine="underline"
+      alignSelf={isAr ? 'flex-end' : 'flex-start'}
+      {...props}
+    />
+  );
+};
