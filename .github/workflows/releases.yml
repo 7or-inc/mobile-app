@@ -1,4 +1,4 @@
-name: Expo Cloud Build and Release
+name: Expo Cloud Build APK Release
 
 on:
   push:
@@ -23,15 +23,15 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: Start EAS Android Build
+      - name: Start EAS Android APK Build
         id: build
         run: |
-          BUILD_URL=$(eas build -p android --profile production --non-interactive --json | jq -r '.[0].artifacts.buildUrl')
+          BUILD_URL=$(eas build -p android --profile production --type apk --non-interactive --json | jq -r '.[0].artifacts.buildUrl')
           echo "BUILD_URL=$BUILD_URL" >> $GITHUB_ENV
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Download build artifact
+      - name: Download APK
         run: |
           curl -L "$BUILD_URL" -o app.apk
 
@@ -40,8 +40,7 @@ jobs:
         with:
           tag_name: ${{ github.ref_name }}-${{ github.run_number }}
           name: Release ${{ github.ref_name }}-${{ github.run_number }}
-          body: |
-            Automated cloud build from branch: ${{ github.ref_name }}
+          body: Automated APK build from branch ${{ github.ref_name }}
           files: app.apk
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
