@@ -12,7 +12,7 @@
     "platforms": ["ios", "android"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.7or-inc.7or"
+      "bundleIdentifier": "com.Hor_inc.Hor"
     },
     "android": {
       "adaptiveIcon": {
@@ -20,7 +20,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.7or-inc.7or"
+      "package": "com.Hor_inc.Hor"
     },
     "web": {
       "bundler": "metro",
