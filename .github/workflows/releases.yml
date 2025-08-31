@@ -33,14 +33,14 @@ jobs:
 
       - name: Download APK
         run: |
-          curl -L "$BUILD_URL" -o app.apk
+          curl -L "$BUILD_URL" -o 7or.apk
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}-${{ github.run_number }}
-          name: Release ${{ github.ref_name }}-${{ github.run_number }}
+          tag_name: 7or-${{ github.ref_name }}
+          name: Release  7or-${{ github.ref_name }}
           body: Automated APK build from branch ${{ github.ref_name }}
-          files: app.apk
+          files: 7or.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
