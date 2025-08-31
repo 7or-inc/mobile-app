@@ -11,8 +11,7 @@ import { useState } from 'react';
 import { TextInput, type TextInputProps } from 'react-native';
 
 import { useLanguage, useThemeMode } from '@/hooks';
-import { base, colors, fonts, type BaseProps, type Color, type FontsProps, type Theme } from '@/theme';
-import { inputVariants } from '@/theme/variants/input';
+import { base, fonts, useTheme, type BaseProps, type Color, type FontsProps, type Theme } from '@/theme';
 
 import { Text } from './Text';
 import { View } from './View';
@@ -40,6 +39,7 @@ interface InputProps extends Omit<RestyleInputProps, 'placeholderTextColor'> {
 
 export const Input = ({ children, placeholderColor, isError, errorText, ...props }: InputProps) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const { inputVariants, colors } = useTheme();
   const { isDarkMode } = useThemeMode();
   const { isAr } = useLanguage();
 

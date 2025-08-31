@@ -6,7 +6,9 @@ export const loginSchema = (t: TranslationFn) =>
   z.object({
     phoneNumber: z
       .string({ error: t('auth.errors.phone-number-required', {}, { string: true }) })
-      .refine((val) => Number(val), { message: t('auth.errors.phone-number-invalid', {}, { string: true }) })
+      .refine((val) => !isNaN(Number(val)) && /^\d+$/.test(val), {
+        message: t('auth.errors.phone-number-invalid', {}, { string: true }),
+      })
       .min(11, { message: t('auth.errors.phone-number-must-be-at-least', { num: 11 }, { string: true }) }),
     password: z
       .string({
