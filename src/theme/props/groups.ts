@@ -1,10 +1,12 @@
 import {
   backgroundColor,
   backgroundColorShorthand,
+  opacity,
   spacing,
   spacingShorthand,
   type BackgroundColorProps,
   type BackgroundColorShorthandProps,
+  type OpacityProps,
   type SpacingProps,
   type SpacingShorthandProps,
 } from '@shopify/restyle';
@@ -23,8 +25,9 @@ import {
 export type BaseProps = BackgroundColorProps<Theme> &
   BackgroundColorShorthandProps<Theme> &
   SpacingProps<Theme> &
-  SpacingShorthandProps<Theme>;
-export const base = [backgroundColor, backgroundColorShorthand, spacing, spacingShorthand];
+  SpacingShorthandProps<Theme> &
+  OpacityProps<Theme>;
+export const base = [backgroundColor, backgroundColorShorthand, spacing, spacingShorthand, opacity];
 
 export type FontsProps = TextSizesProps & FontHeightsProps & FontWeightsProps;
 export const fonts = [textSize, fontHeights, fontWeights];

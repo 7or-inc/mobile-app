@@ -8,7 +8,7 @@ export const fontSizes = {
   '3xl': 28,
   '4xl': 36,
   '5xl': 48,
-  '6xl': 72,
+  '6xl': 64,
 } as const;
 export type FontSizes = typeof fontSizes;
 
@@ -22,5 +22,6 @@ export const lineHeights = {
   '3xl': 36,
   '4xl': 48,
   '5xl': 56,
+  '6xl': 72,
 } as const;
 export type LineHeights = typeof lineHeights;
