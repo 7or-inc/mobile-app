@@ -26,7 +26,7 @@ jobs:
       - name: Start EAS Android APK Build
         id: build
         run: |
-          BUILD_URL=$(eas build -p android --profile production --non-interactive --json | jq -r '.artifacts.buildUrl')
+          BUILD_URL=$(eas build -p android --profile production --non-interactive --json | jq -r '.[0].artifacts.buildUrl')
           echo "BUILD_URL=$BUILD_URL" >> $GITHUB_ENV
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
