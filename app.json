@@ -9,15 +9,18 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "assets": ["./src/assets/fonts/"],
+    "platforms": ["ios", "android"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.7or-inc.7or"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/7or-logo.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.7or-inc.7or"
     },
     "web": {
       "bundler": "metro",
