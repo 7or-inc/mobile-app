@@ -52,7 +52,7 @@ export const Login = () => {
   return (
     <View px="2.5" py="4" flex={1} width="100%" justifyContent="space-between">
       <View gap="12">
-        <Text variant="h1" size="6xl" fontHeight="6xl">
+        <Text variant="h1" size="6xl" fontHeight="6xl" textAlign={isAr ? 'right' : 'left'}>
           {t('auth.log-in')}
         </Text>
 

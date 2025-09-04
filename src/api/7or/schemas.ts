@@ -6,10 +6,10 @@ export const loginSchema = (t: TranslationFn) =>
   z.object({
     phoneNumber: z
       .string({ error: t('auth.errors.phone-number-required', {}, { string: true }) })
-      .refine((val) => /^\d+$/.test(val), {
+      .refine((val) => /^01\d*$/.test(val), {
         message: t('auth.errors.phone-number-invalid', {}, { string: true }),
       })
-      .min(11, { message: t('auth.errors.phone-number-must-be-at-least', { num: 11 }, { string: true }) }),
+      .length(11, { message: t('auth.errors.phone-number-must-equal-to', { num: 11 }, { string: true }) }),
     password: z
       .string({
         error: t('auth.errors.password-required', {}, { string: true }),
@@ -18,3 +18,17 @@ export const loginSchema = (t: TranslationFn) =>
   });
 
 export type LoginSchema = z.infer<ReturnType<typeof loginSchema>>;
+
+export const signupSchema = (t: TranslationFn) =>
+  z.object({
+    ...loginSchema(t).shape,
+    firstName: z
+      .string({ error: t('auth.errors.first-name-required', {}, { string: true }) })
+      .min(2, { message: t('auth.errors.first-name-must-be-at-least', { num: 2 }, { string: true }) }),
+    lastName: z
+      .string({ error: t('auth.errors.last-name-required', {}, { string: true }) })
+      .min(2, { message: t('auth.errors.last-name-must-be-at-least', { num: 2 }, { string: true }) }),
+    isAdmin: z.boolean().optional(),
+  });
+
+export type SignupSchema = z.infer<ReturnType<typeof signupSchema>>;
