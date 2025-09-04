@@ -1,7 +1,7 @@
-import { Container, Text } from '@/components';
+import { Container, SignUp } from '@/components';
 
 export default () => (
   <Container>
-    <Text>Sign Up</Text>
+    <SignUp />
   </Container>
 );
