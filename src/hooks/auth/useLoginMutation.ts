@@ -2,12 +2,15 @@ import { useMutation, type MutationOptions } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 
 import { hor, type ErrorResponse, type LoginResponse, type LoginSchema } from '@/api';
+import { COUNTRY_CODE } from '@/consts';
 import { useAuthStore } from '@/stores';
 
 const mutationKey = ['login'];
 
 const mutationFn = async ({ phoneNumber, ...data }: LoginSchema) =>
-  hor.post<LoginResponse>('/auth/login', { ...data, phone_number: `2${phoneNumber}` }).then((res) => res.data.token);
+  hor
+    .post<LoginResponse>('/auth/login', { ...data, phone_number: `${COUNTRY_CODE}${phoneNumber}` })
+    .then((res) => res.data.token);
 
 export const useLoginMutation = (options: MutationOptions<string, AxiosError<ErrorResponse>, LoginSchema> = {}) => {
   const login = useAuthStore((state) => state.login);
