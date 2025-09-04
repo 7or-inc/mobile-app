@@ -7,7 +7,7 @@ import { useAuthStore } from '@/stores';
 const mutationKey = ['login'];
 
 const mutationFn = async ({ phoneNumber, ...data }: LoginSchema) =>
-  hor.post<LoginResponse>('/auth/login', { ...data, phone_number: phoneNumber }).then((res) => res.data.token);
+  hor.post<LoginResponse>('/auth/login', { ...data, phone_number: `2${phoneNumber}` }).then((res) => res.data.token);
 
 export const useLoginMutation = (options: MutationOptions<string, AxiosError<ErrorResponse>, LoginSchema> = {}) => {
   const login = useAuthStore((state) => state.login);
