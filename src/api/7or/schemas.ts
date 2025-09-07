@@ -2,6 +2,8 @@ import { z } from 'zod';
 
 import type { TranslationFn } from '@/i18n/types';
 
+import { OTP_LENGTH } from './const';
+
 export const loginSchema = (t: TranslationFn) =>
   z.object({
     phoneNumber: z
@@ -35,7 +37,9 @@ export type SignupSchema = z.infer<ReturnType<typeof signupSchema>>;
 
 export const otpSchema = (t: TranslationFn) =>
   z.object({
-    otp: z.string().length(6, { message: t('auth.errors.otp-must-be', { num: 6 }, { string: true }) }),
+    otp: z
+      .string()
+      .length(OTP_LENGTH, { message: t('auth.errors.otp-must-be', { num: OTP_LENGTH }, { string: true }) }),
   });
 
 export type OTPSchema = z.infer<ReturnType<typeof otpSchema>>;

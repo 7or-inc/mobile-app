@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useLocalSearchParams } from 'expo-router';
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 
-import { otpSchema, type OTPRequest, type OTPSchema } from '@/api';
+import { OTP_LENGTH, otpSchema, type OTPRequest, type OTPSchema } from '@/api';
 import { useLanguage, useOTPMutation } from '@/hooks';
 import { useTranslate } from '@/i18n';
 
@@ -50,7 +50,7 @@ export const VerifyOTP = () => {
         <View gap="6" justifyContent={isAr ? 'flex-end' : 'flex-start'}>
           <Text color="foreground" size="md" textAlign={isAr ? 'right' : 'left'}>
             {t('auth.verify-otp.enter-otp-sent-to', {
-              num: 6,
+              num: OTP_LENGTH,
               phoneNumber: params.phoneNumber ?? '',
               Number: (chunks) => <Text color="primary">{chunks}</Text>,
               Style: (chunks) => <Text color="accent">{chunks}</Text>,
