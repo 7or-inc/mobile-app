@@ -29,7 +29,7 @@ const RestyleInput = createRestyleComponent<RestyleInputProps, Theme>(
 );
 
 type State = 'default' | 'focused' | 'error';
-interface InputProps extends Omit<RestyleInputProps, 'placeholderTextColor'> {
+export interface InputProps extends Omit<RestyleInputProps, 'placeholderTextColor'> {
   ref?: React.Ref<TextInput>;
   placeholderColor?: Color;
   onStateChange?: (state: State) => void;

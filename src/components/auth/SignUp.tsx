@@ -1,11 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'expo-router';
+import { useRef } from 'react';
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
+import type { TextInput } from 'react-native';
 
 import { signupSchema, type SignupSchema } from '@/api';
 import { useLanguage, useSignupMutation } from '@/hooks';
 import { useTranslate } from '@/i18n';
-import { useRef } from 'react';
-import type { TextInput } from 'react-native';
+
 import { Button, Input, Link, Text, View } from '../custom';
 
 const defaultValues: SignupSchema = {
@@ -17,11 +19,13 @@ const defaultValues: SignupSchema = {
 
 export const SignUp = () => {
   const t = useTranslate();
+  const router = useRouter();
 
   const form = useForm<SignupSchema>({
     defaultValues,
     mode: 'onChange',
     resolver: zodResolver(signupSchema(t)),
+    shouldFocusError: true,
   });
 
   const { isAr } = useLanguage();
@@ -32,9 +36,15 @@ export const SignUp = () => {
   const passwordFieldRef = useRef<TextInput>(null);
 
   const onSubmit: SubmitHandler<SignupSchema> = (data: SignupSchema) => {
-    if (!form.formState.isValid || signupMutation.isPending) return;
+    if (signupMutation.isPending) return;
 
     signupMutation.mutate(data, {
+      onSuccess: () => {
+        router.push({
+          pathname: '/(auth)/verify-otp',
+          params: { phoneNumber: data.phoneNumber, purpose: 'signup' },
+        });
+      },
       onError: (error) => {
         if (error.response?.status === 409)
           form.setError('phoneNumber', {
@@ -69,6 +79,7 @@ export const SignUp = () => {
               />
             )}
           />
+
           <Controller
             control={form.control}
             name="lastName"

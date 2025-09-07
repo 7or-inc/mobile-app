@@ -22,6 +22,7 @@ export default () => {
           <Stack.Screen name="(auth)/select-auth" options={{ headerShown: false }} />
           <Stack.Screen name="(auth)/sign-up" options={{ headerShown: false }} />
           <Stack.Screen name="(auth)/log-in" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)/verify-otp" options={{ headerShown: false }} />
         </Stack.Protected>
 
         <Stack.Protected guard={isLoggedIn}>

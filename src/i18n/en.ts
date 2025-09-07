@@ -1,8 +1,10 @@
 export default {
   'app.name': '7or',
+  'action.verify': 'Verify',
   'auth.select-auth.title': 'Create your 7or account',
   'auth.sign-up': 'Sign Up',
   'auth.log-in': 'Log In',
+  'auth.verify-otp': 'Verify OTP',
   'auth.phone-number': 'Phone Number',
   'auth.password': 'Password',
   'auth.first-name': 'First Name',
@@ -22,6 +24,10 @@ export default {
   'auth.errors.first-name-must-be-at-least': 'First name must be at least {num} characters long',
   'auth.errors.last-name-required': 'Last name is required',
   'auth.errors.last-name-must-be-at-least': 'Last name must be at least {num} characters long',
+  'auth.errors.otp-must-be': 'OTP must be exactly {num} digits',
+  'auth.errors.otp-invalid-or-expired': "OTP is invalid or it's expired",
+  'auth.verify-otp.enter-otp-sent-to':
+    'Enter the <Number>{num}</Number> digit OTP we sent to <Number>{phoneNumber}</Number> on <Style>WhatsApp</Style>',
   'app.policies':
     'By continuing you accept our <br /> <Style>Terms of Service</Style> and <Style>Privacy Policy</Style>',
 } as const;

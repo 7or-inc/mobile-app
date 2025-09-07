@@ -16,6 +16,7 @@ export const useLoginMutation = (options: MutationOptions<string, AxiosError<Err
   const login = useAuthStore((state) => state.login);
 
   return useMutation<string, AxiosError<ErrorResponse>, LoginSchema>({
+    ...options,
     mutationKey,
     mutationFn,
     onSuccess: (...data) => {

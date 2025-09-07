@@ -1,8 +1,10 @@
 export default {
   'app.name': 'حر',
+  'action.verify': 'تحقق',
   'auth.select-auth.title': 'قم بإنشاء حساب حر الخاص بك',
   'auth.sign-up': 'إنشاء حساب',
   'auth.log-in': 'تسجيل الدخول',
+  'auth.verify-otp': 'تحقق من رمز التحقق',
   'auth.phone-number': 'رقم الهاتف',
   'auth.password': 'كلمة المرور',
   'auth.first-name': 'الاسم الأول',
@@ -22,5 +24,9 @@ export default {
   'auth.errors.first-name-must-be-at-least': 'الاسم الأول يجب أن يكون على الأقل {num} أحرف',
   'auth.errors.last-name-required': 'اسم العائلة مطلوب',
   'auth.errors.last-name-must-be-at-least': 'اسم العائلة يجب أن يكون على الأقل {num} أحرف',
+  'auth.errors.otp-must-be': 'رمز التحقق يجب أن يكون بالضبط {num} أرقام',
+  'auth.errors.otp-invalid-or-expired': 'رمز التحقق غير صالح أو منتهي الصلاحية',
+  'auth.verify-otp.enter-otp-sent-to':
+    'أدخل رمز التحقق المكون من <Number>{num}</Number> أرقام الذي أرسلناه إلى <Number>{phoneNumber}</Number> على <Style>واتساب</Style>',
   'app.policies': 'باستمرارك، فإنك توافق على <br /> <Style>شروط الخدمة</Style> و <Style>سياسة الخصوصية</Style>',
 } as const;
