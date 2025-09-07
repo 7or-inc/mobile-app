@@ -27,6 +27,7 @@ export type BaseProps = BackgroundColorProps<Theme> &
   SpacingProps<Theme> &
   SpacingShorthandProps<Theme> &
   OpacityProps<Theme>;
+
 export const base = [backgroundColor, backgroundColorShorthand, spacing, spacingShorthand, opacity];
 
 export type FontsProps = TextSizesProps & FontHeightsProps & FontWeightsProps;

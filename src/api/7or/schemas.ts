@@ -32,3 +32,10 @@ export const signupSchema = (t: TranslationFn) =>
   });
 
 export type SignupSchema = z.infer<ReturnType<typeof signupSchema>>;
+
+export const otpSchema = (t: TranslationFn) =>
+  z.object({
+    otp: z.string().length(6, { message: t('auth.errors.otp-must-be', { num: 6 }, { string: true }) }),
+  });
+
+export type OTPSchema = z.infer<ReturnType<typeof otpSchema>>;

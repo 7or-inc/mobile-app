@@ -21,6 +21,7 @@ export const Login = () => {
     defaultValues,
     mode: 'onChange',
     resolver: zodResolver(loginSchema(t)),
+    shouldFocusError: true,
   });
 
   const { isAr } = useLanguage();
@@ -28,7 +29,7 @@ export const Login = () => {
   const passwordFieldRef = useRef<TextInput>(null);
 
   const onSubmit: SubmitHandler<LoginSchema> = (data: LoginSchema) => {
-    if (!form.formState.isValid || loginMutation.isPending) return;
+    if (loginMutation.isPending) return;
 
     loginMutation.mutate(data, {
       onError: (error) => {

@@ -3,6 +3,7 @@ export * from './Common';
 export * from './Input';
 export * from './Link';
 export * from './Loader';
+export * from './OTPInput';
 export * from './SafeAreaView';
 export * from './Text';
 export * from './View';

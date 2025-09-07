@@ -11,7 +11,7 @@ const mutationFn = async ({ phoneNumber, isAdmin, firstName, lastName, ...data }
     .post<SignupResponse>('/auth/signup', {
       ...data,
       phone_number: `${COUNTRY_CODE}${phoneNumber}`,
-      is_admin: isAdmin,
+      is_admin: !!isAdmin,
       first_name: firstName,
       last_name: lastName,
     })
