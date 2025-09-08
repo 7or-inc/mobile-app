@@ -38,8 +38,8 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: 7or-${{ github.ref_name }}
-          name: Release  7or-${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}-${{ github.run_number }}
+          name: ${{ github.ref_name }}
           body: Automated APK build from branch ${{ github.ref_name }}
           files: 7or.apk
         env:
