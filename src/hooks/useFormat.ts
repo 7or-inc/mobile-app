@@ -4,5 +4,8 @@ export const useFormatNumber = () => {
   const { language: appLanguage } = useLanguage();
 
   return (num: number, options: Intl.NumberFormatOptions = {}, language: Language = appLanguage) =>
-    new Intl.NumberFormat(language, options).format(num);
+    String(num)
+      .split('')
+      .map((char) => new Intl.NumberFormat(language, options).format(Number(char)))
+      .join('');
 };

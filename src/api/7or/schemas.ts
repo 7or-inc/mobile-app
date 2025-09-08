@@ -30,7 +30,6 @@ export const signupSchema = (t: TranslationFn) =>
     lastName: z
       .string({ error: t('auth.errors.last-name-required', {}, { string: true }) })
       .min(2, { message: t('auth.errors.last-name-must-be-at-least', { num: 2 }, { string: true }) }),
-    isAdmin: z.boolean().optional(),
   });
 
 export type SignupSchema = z.infer<ReturnType<typeof signupSchema>>;

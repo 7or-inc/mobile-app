@@ -10,6 +10,12 @@ export const buttonVariants = {
     borderColor: 'primary',
     borderWidth: 2,
   },
+  link: {
+    px: 0,
+    py: 0,
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+  },
   defaults: {
     py: 2,
     px: 4,
@@ -20,10 +26,18 @@ export const buttonVariants = {
   },
 } as const;
 
+const textDefaults = {
+  fontSize: fontSizes['xl'],
+  lineHeight: lineHeights['xl'],
+};
+
 export const buttonTextVariants = {
-  primaryButton: {
-    fontSize: fontSizes['xl'],
-    lineHeight: lineHeights['xl'],
+  primaryButton: textDefaults,
+  linkButton: {
+    ...textDefaults,
+    fontSize: fontSizes['xs'],
+    lineHeight: lineHeights['xs'],
+    color: 'primary',
   },
 } as const;
 

@@ -1,3 +1,4 @@
 export * from './useLoginMutation';
-export * from './useOTPMutation';
+export * from './useSendOTPMutation';
 export * from './useSignupMutation';
+export * from './useVerifyOTPMutation';

@@ -1,6 +1,7 @@
 export default {
   'app.name': '7or',
   'action.verify': 'Verify',
+  'action.resend': 'Resend',
   'auth.select-auth.title': 'Create your 7or account',
   'auth.sign-up': 'Sign Up',
   'auth.log-in': 'Log In',
@@ -28,6 +29,8 @@ export default {
   'auth.errors.otp-invalid-or-expired': "OTP is invalid or it's expired",
   'auth.verify-otp.enter-otp-sent-to':
     'Enter the <Number>{num}</Number> digit OTP we sent to <Number>{phoneNumber}</Number> on <Style>WhatsApp</Style>',
+  'auth.verify-otp.resend-otp': "Didn't receive the OTP?",
+  'auth.verify-otp.resend-otp-countdown': 'Resend OTP in <Style>{countdown}</Style> seconds',
   'app.policies':
     'By continuing you accept our <br /> <Style>Terms of Service</Style> and <Style>Privacy Policy</Style>',
 } as const;

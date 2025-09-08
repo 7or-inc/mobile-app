@@ -1,4 +1,4 @@
-import { createRestyleComponent, createText } from '@shopify/restyle';
+import { border, createRestyleComponent, createText, type BorderProps } from '@shopify/restyle';
 
 import { getFontWeightFamily } from '@/assets/fonts/helpers';
 import { useLanguage } from '@/hooks';
@@ -7,9 +7,9 @@ import { textVariants } from '@/theme/variants/text';
 
 export const BaseText = createText<Theme>();
 
-type TextProps = React.ComponentProps<typeof BaseText> & FontsProps;
+type TextProps = React.ComponentProps<typeof BaseText> & FontsProps & BorderProps<Theme>;
 
-const RestyleText = createRestyleComponent<TextProps, Theme>(fonts, BaseText);
+const RestyleText = createRestyleComponent<TextProps, Theme>([...fonts, border], BaseText);
 
 export const Text = (props: TextProps) => {
   const { language } = useLanguage();

@@ -16,17 +16,15 @@ const defaultValues: LoginSchema = {
 
 export const Login = () => {
   const t = useTranslate();
-
+  const { isAr } = useLanguage();
+  const passwordFieldRef = useRef<TextInput>(null);
   const form = useForm<LoginSchema>({
     defaultValues,
     mode: 'onChange',
     resolver: zodResolver(loginSchema(t)),
     shouldFocusError: true,
   });
-
-  const { isAr } = useLanguage();
   const loginMutation = useLoginMutation();
-  const passwordFieldRef = useRef<TextInput>(null);
 
   const onSubmit: SubmitHandler<LoginSchema> = (data: LoginSchema) => {
     if (loginMutation.isPending) return;

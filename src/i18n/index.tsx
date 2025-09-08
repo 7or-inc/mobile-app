@@ -11,9 +11,10 @@ export const useTranslate = () => {
   const formatNumber = useFormatNumber();
 
   const formatValue = useCallback(
-    (value: unknown) => {
-      if (typeof value === 'number') return formatNumber(value, { useGrouping: false });
-      return String(value);
+    (value: string | number) => {
+      if (typeof value !== 'number') return value;
+
+      return formatNumber(value, { useGrouping: false });
     },
     [formatNumber]
   );

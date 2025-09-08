@@ -1,4 +1,4 @@
-import type { LoginSchema, OTPSchema } from './schemas';
+import type { OTPSchema } from './schemas';
 
 export interface ErrorResponse {
   error: string;
@@ -10,12 +10,15 @@ export interface LoginResponse {
 }
 
 export interface SignupResponse {
-  message: string;
+  authId: string;
 }
 
 export interface OTPRequest extends OTPSchema {
-  phoneNumber: LoginSchema['phoneNumber'];
-  purpose: 'signup' | 'reset_password';
+  authId: string;
+}
+
+export interface SendOTPResponse {
+  message: string;
 }
 
 export interface OTPResponse {

@@ -2,29 +2,31 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useLocalSearchParams } from 'expo-router';
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 
-import { OTP_LENGTH, otpSchema, type OTPRequest, type OTPSchema } from '@/api';
-import { useLanguage, useOTPMutation } from '@/hooks';
+import { OTP_LENGTH, otpSchema, type OTPSchema } from '@/api';
+import { useCountDown, useLanguage, useSendOTPMutation, useVerifyOTPMutation } from '@/hooks';
 import { useTranslate } from '@/i18n';
 
 import { Button, OtpInput, Text, View } from '../custom';
+import type { VerifyOTPParams } from './types';
 
 const defaultValues: OTPSchema = {
   otp: '',
 };
 
 export const VerifyOTP = () => {
-  const t = useTranslate();
-  const params = useLocalSearchParams<Omit<OTPRequest, 'otp'>>();
+  const { authId, phoneNumber } = useLocalSearchParams<Omit<VerifyOTPParams, ''>>();
 
+  const t = useTranslate();
+  const { isAr } = useLanguage();
+  const countDown = useCountDown(60);
   const form = useForm<OTPSchema>({
     defaultValues,
     mode: 'onBlur',
     resolver: zodResolver(otpSchema(t)),
     shouldFocusError: true,
   });
-
-  const { isAr } = useLanguage();
-  const otpMutation = useOTPMutation(params);
+  const sendOTPMutation = useSendOTPMutation();
+  const otpMutation = useVerifyOTPMutation({ authId });
 
   const onSubmit: SubmitHandler<OTPSchema> = (data: OTPSchema) => {
     if (otpMutation.isPending) return;
@@ -51,7 +53,7 @@ export const VerifyOTP = () => {
           <Text color="foreground" size="md" textAlign={isAr ? 'right' : 'left'}>
             {t('auth.verify-otp.enter-otp-sent-to', {
               num: OTP_LENGTH,
-              phoneNumber: params.phoneNumber ?? '',
+              phoneNumber,
               Number: (chunks) => <Text color="primary">{chunks}</Text>,
               Style: (chunks) => <Text color="accent">{chunks}</Text>,
             })}
@@ -82,6 +84,35 @@ export const VerifyOTP = () => {
         >
           {t('action.verify')}
         </Button>
+
+        <View flexDirection={isAr ? 'row-reverse' : 'row'} alignItems="center" gap="2">
+          {countDown.isRunning ? (
+            <Text color="darkGrey" size="xs" textAlign="center">
+              {t('auth.verify-otp.resend-otp-countdown', {
+                countdown: countDown.count,
+                Style: (chunks) => (
+                  <Text color="primary" size="xs">
+                    {chunks}
+                  </Text>
+                ),
+              })}
+            </Text>
+          ) : (
+            <>
+              <Text color="darkGrey" size="xs" textAlign="center">
+                {t('auth.verify-otp.resend-otp')}
+              </Text>
+
+              <Button
+                variant="link"
+                disabled={sendOTPMutation.isPending || otpMutation.isSuccess}
+                onPress={() => sendOTPMutation.mutate(authId, { onSettled: () => countDown.restart() })}
+              >
+                {t('action.resend')}
+              </Button>
+            </>
+          )}
+        </View>
       </View>
     </View>
   );

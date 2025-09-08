@@ -18,31 +18,29 @@ const defaultValues: SignupSchema = {
 };
 
 export const SignUp = () => {
-  const t = useTranslate();
   const router = useRouter();
+  const lastNameFieldRef = useRef<TextInput>(null);
+  const phoneNumberFieldRef = useRef<TextInput>(null);
+  const passwordFieldRef = useRef<TextInput>(null);
 
+  const t = useTranslate();
+  const { isAr } = useLanguage();
   const form = useForm<SignupSchema>({
     defaultValues,
     mode: 'onChange',
     resolver: zodResolver(signupSchema(t)),
     shouldFocusError: true,
   });
-
-  const { isAr } = useLanguage();
   const signupMutation = useSignupMutation();
-
-  const lastNameFieldRef = useRef<TextInput>(null);
-  const phoneNumberFieldRef = useRef<TextInput>(null);
-  const passwordFieldRef = useRef<TextInput>(null);
 
   const onSubmit: SubmitHandler<SignupSchema> = (data: SignupSchema) => {
     if (signupMutation.isPending) return;
 
     signupMutation.mutate(data, {
-      onSuccess: () => {
+      onSuccess: ({ authId }) => {
         router.push({
           pathname: '/(auth)/verify-otp',
-          params: { phoneNumber: data.phoneNumber, purpose: 'signup' },
+          params: { authId, phoneNumber: data.phoneNumber },
         });
       },
       onError: (error) => {
