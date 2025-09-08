@@ -34,6 +34,14 @@ export const signupSchema = (t: TranslationFn) =>
 
 export type SignupSchema = z.infer<ReturnType<typeof signupSchema>>;
 
+export const forgotPasswordSchema = (t: TranslationFn) =>
+  z.object({
+    phoneNumber: loginSchema(t).shape.phoneNumber,
+    newPassword: loginSchema(t).shape.password,
+  });
+
+export type ForgotPasswordSchema = z.infer<ReturnType<typeof forgotPasswordSchema>>;
+
 export const otpSchema = (t: TranslationFn) =>
   z.object({
     otp: z
