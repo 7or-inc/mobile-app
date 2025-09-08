@@ -94,7 +94,7 @@ export const Login = () => {
           </View>
 
           <Link href="/(auth)/forgot-password" size="xs" weight={400}>
-            {t('auth.forgot-password')}
+            {t('auth.log-in.forgot-password')}
           </Link>
         </View>
       </View>

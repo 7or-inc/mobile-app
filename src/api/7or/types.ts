@@ -13,6 +13,8 @@ export interface SignupResponse {
   authId: string;
 }
 
+export type ForgotPasswordResponse = SignupResponse;
+
 export interface OTPRequest extends OTPSchema {
   authId: string;
 }

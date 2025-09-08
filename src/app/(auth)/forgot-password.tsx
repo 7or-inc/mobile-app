@@ -1,9 +1,7 @@
-import { Text, View } from '@/components';
+import { Container, ForgotPassword } from '@/components';
 
-export default () => {
-  return (
-    <View>
-      <Text>Forgot Password</Text>
-    </View>
-  );
-};
+export default () => (
+  <Container>
+    <ForgotPassword />
+  </Container>
+);

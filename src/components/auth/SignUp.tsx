@@ -37,12 +37,11 @@ export const SignUp = () => {
     if (signupMutation.isPending) return;
 
     signupMutation.mutate(data, {
-      onSuccess: ({ authId }) => {
+      onSuccess: ({ authId }) =>
         router.push({
           pathname: '/(auth)/verify-otp',
           params: { authId, phoneNumber: data.phoneNumber },
-        });
-      },
+        }),
       onError: (error) => {
         if (error.response?.status === 409)
           form.setError('phoneNumber', {
