@@ -36,4 +36,8 @@ export default {
   'auth.verify-otp.resend-otp-countdown': 'Resend OTP in <Style>{countdown}</Style> seconds',
   'app.policies':
     'By continuing you accept our <br /> <Style>Terms of Service</Style> and <Style>Privacy Policy</Style>',
+  'onboarding.select-type.title': 'Select your profile type',
+  'profile.type.client': 'Client',
+  'profile.type.part-time-worker': 'Part-time Worker',
+  'profile.type.service-provider': 'Service Provider',
 } as const;

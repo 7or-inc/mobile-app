@@ -34,6 +34,9 @@ export default {
     'أدخل رمز التحقق المكون من <Number>{num}</Number> أرقام الذي أرسلناه إلى <Number>{phoneNumber}</Number> على <Style>واتساب</Style>',
   'auth.verify-otp.resend-otp': 'لم تستلم رمز التحقق؟',
   'auth.verify-otp.resend-otp-countdown': 'إعادة إرسال رمز التحقق خلال <Style>{countdown}</Style> ثواني',
-
   'app.policies': 'باستمرارك، فإنك توافق على <br /> <Style>شروط الخدمة</Style> و <Style>سياسة الخصوصية</Style>',
+  'onboarding.select-type.title': 'اختر نوع حسابك',
+  'profile.type.client': 'عميل',
+  'profile.type.part-time-worker': 'عامل بدوام جزئي',
+  'profile.type.service-provider': 'مزود خدمة',
 } as const;
